@@ -1,9 +1,35 @@
-import { Container, Typography } from "@mui/material";
+import { useEffect } from "react";
+import { Container, Grid, Typography } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+
+import ProductCard from "../components/product/ProductCard";
+import { products as fakeProducts } from "../services/productService";
+import { setProducts } from "../redux/slices/productSlice";
+import useFetch from "../hooks/useFetch";
 
 const Products = () => {
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.products.list);
+
+  const fetchedProducts = useFetch(fakeProducts);
+
+  useEffect(() => {
+    dispatch(setProducts(fetchedProducts));
+  }, [dispatch, fetchedProducts]);
+
   return (
     <Container sx={{ mt: 4 }}>
-      <Typography variant="h4">Products</Typography>
+      <Typography variant="h4" gutterBottom>
+        Products
+      </Typography>
+
+      <Grid container spacing={3}>
+        {products.map((product) => (
+          <Grid item key={product.id} xs={12} sm={6} md={4}>
+            <ProductCard product={product} />
+          </Grid>
+        ))}
+      </Grid>
     </Container>
   );
 };

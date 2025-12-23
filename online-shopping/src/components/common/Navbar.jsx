@@ -1,7 +1,17 @@
-import { AppBar, Toolbar, Typography, Button } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  Badge,
+} from "@mui/material";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router-dom";
+import useCart from "../../hooks/useCart";
 
 const Navbar = () => {
+  const { totalItems } = useCart();
+
   return (
     <AppBar position="static">
       <Toolbar>
@@ -16,7 +26,9 @@ const Navbar = () => {
           Products
         </Button>
         <Button color="inherit" component={Link} to="/cart">
-          Cart
+          <Badge badgeContent={totalItems} color="secondary">
+            <ShoppingCartIcon />
+          </Badge>
         </Button>
       </Toolbar>
     </AppBar>
