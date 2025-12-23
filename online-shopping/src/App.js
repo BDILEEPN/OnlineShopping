@@ -1,10 +1,14 @@
-import './App.css';
+import AppRoutes from "./routes/AppRoutes";
+import Navbar from "./components/common/Navbar";
+import Footer from "./components/common/Footer";
 
 function App() {
   return (
-    <div className="App">
-      <h1> Hi</h1>        
-    </div>
+    <>
+      <Navbar />
+      <AppRoutes />
+      <Footer />
+    </>
   );
 }
 
