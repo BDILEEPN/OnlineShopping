@@ -19,7 +19,7 @@ const Products = () => {
 
   return (
     <Container sx={{ mt: 4 }}>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h3" gutterBottom>
         Products
       </Typography>
 
