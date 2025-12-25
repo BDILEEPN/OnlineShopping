@@ -8,7 +8,7 @@ import {
 import { Link } from "react-router-dom";
 import { useCartContext } from "../../context/CartContext";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, removeProductsByIdHandler }) => {
   const { addToCart } = useCartContext();
 
   return (
@@ -35,6 +35,7 @@ const ProductCard = ({ product }) => {
         >
           Add to Cart
         </Button>
+        <button onClick={()=>removeProductsByIdHandler(product.id)}>Remove</button>
       </CardActions>
     </Card>
   );

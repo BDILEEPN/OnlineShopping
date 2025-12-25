@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import ProductCard from "../components/product/ProductCard";
 import { products as fakeProducts } from "../services/productService";
-import { setProducts } from "../redux/slices/productSlice";
+import { setProducts, removeProducts,removeProductsById} from "../redux/slices/productSlice";
 import useFetch from "../hooks/useFetch";
 
 const Products = () => {
@@ -12,6 +12,13 @@ const Products = () => {
   const products = useSelector((state) => state.products.list);
 
   const fetchedProducts = useFetch(fakeProducts);
+
+  const removeProductsHandler=()=>{
+    dispatch(removeProducts([]));
+  }
+   const removeProductsByIdHandler=(id)=>{
+    dispatch(removeProductsById(products.filter( (item)=>item.id!==id)));
+  }
 
   useEffect(() => {
     dispatch(setProducts(fetchedProducts));
@@ -22,13 +29,15 @@ const Products = () => {
       <Typography variant="h3" gutterBottom>
         Products
       </Typography>
-
+    <button onClick={removeProductsHandler}>Remove Products</button>
       <Grid container spacing={3}>
-        {products.map((product) => (
-          <Grid item key={product.id} xs={12} sm={6} md={4}>
-            <ProductCard product={product} />
+        
+        {products.map((product) => (            
+          <Grid item key={product.id} xs={12} sm={6} md={4}>            
+            <ProductCard product={product} removeProductsByIdHandler={removeProductsByIdHandler} />            
           </Grid>
         ))}
+        
       </Grid>
     </Container>
   );
